@@ -58,7 +58,6 @@ export default async function SettingSpage() {
     });
   }
 
-  console.log("totot", data?.colorScheme);
   return (
     <div className="grid items-start gap-8">
       <div className="flex items-center justify-between px-2">
@@ -109,7 +108,7 @@ export default async function SettingSpage() {
                         <SelectLabel>Color</SelectLabel>
                         <SelectItem value="theme-green">Green</SelectItem>
                         <SelectItem value="theme-blue">Blue</SelectItem>
-                        <SelectItem value="theme-purple">Purple</SelectItem>
+                        <SelectItem value="theme-violet">Violet</SelectItem>
                         <SelectItem value="theme-rose">Rose</SelectItem>
                         <SelectItem value="theme-orange">Orange</SelectItem>
                         <SelectItem value="theme-yellow">Yellow</SelectItem>
