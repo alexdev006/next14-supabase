@@ -20,8 +20,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Button } from "@/components/ui/button";
 import SubmitButton from "@/components/submitButton";
+import { revalidatePath } from "next/cache";
 
 async function getData(userId: string) {
   const data = prisma.user.findUnique({
@@ -56,6 +56,7 @@ export default async function SettingSpage() {
         colorScheme: colorScheme ?? undefined,
       },
     });
+    revalidatePath("/", "layout");
   }
 
   return (
