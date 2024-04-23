@@ -8,9 +8,12 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { ThemeToggle } from "./theme-toggle";
 import { Button } from "./ui/button";
 import Link from "next/link";
+import UserNav from "./userNav";
 
 export default async function Navbar() {
-  const { isAuthenticated } = getKindeServerSession();
+  const { isAuthenticated, getUser } = getKindeServerSession();
+  const user = await getUser();
+
   return (
     <div className="border border-b bg-background p-2 flex justify-between h-[5vh] items-center">
       <Link href="/">
@@ -23,9 +26,11 @@ export default async function Navbar() {
       <div className="">Nav</div>
       <div className="flex gap-x-2">
         {(await isAuthenticated()) ? (
-          <LogoutLink>
-            <Button>Log out</Button>
-          </LogoutLink>
+          <UserNav
+            email={user?.email as string}
+            image={user?.picture as string}
+            name={user?.given_name as string}
+          />
         ) : (
           <>
             <LoginLink>
