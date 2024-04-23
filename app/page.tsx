@@ -1,3 +1,7 @@
+import { RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";
+
+import { Button } from "@/components/ui/button";
+
 export default function Home() {
   return (
     <section className="flex items-center justify-center bg-background h-[90vh]">
@@ -8,6 +12,20 @@ export default function Home() {
               Sort yours notes easily
             </span>
           </span>
+          <h1 className="mt-8 text-3xl font-extrabold tracking-tight lg:text-6xl">
+            Create notes with ease
+          </h1>
+          <p className="max-x-xl mx-auto mt-8 text-base lg:text-xl text-secondary-foreground">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore
+            corporis molestias, at mollitia non perferendis officia.
+          </p>
+        </div>
+        <div className="flex justify-center max-w-sm mx-auto mt-10">
+          <RegisterLink>
+            <Button size="lg" className="w-full">
+              Sign up for free
+            </Button>
+          </RegisterLink>
         </div>
       </div>
     </section>

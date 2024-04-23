@@ -7,12 +7,19 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 import { ThemeToggle } from "./theme-toggle";
 import { Button } from "./ui/button";
+import Link from "next/link";
 
 export default async function Navbar() {
   const { isAuthenticated } = getKindeServerSession();
   return (
-    <div className="border border-b-2 p-2 flex justify-between h-[5vh] items-center">
-      <div className="">Logo</div>
+    <div className="border border-b bg-background p-2 flex justify-between h-[5vh] items-center">
+      <Link href="/">
+        <h1>
+          Logo
+          <span className="text-primary"> Saas</span>
+        </h1>
+      </Link>
+
       <div className="">Nav</div>
       <div className="flex gap-x-2">
         {(await isAuthenticated()) ? (
