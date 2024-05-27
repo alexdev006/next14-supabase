@@ -20,9 +20,9 @@ async function getData({ firstname, email, id, lastname, profileImage }: User) {
     const name = `${firstname ?? ""} ${lastname ?? ""}`;
     await prisma.user.create({
       data: {
-        id: id,
-        email: email,
-        name: name,
+        id,
+        email,
+        name,
       },
     });
   }

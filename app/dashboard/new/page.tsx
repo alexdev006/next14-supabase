@@ -34,8 +34,8 @@ export default async function NewNoteRoute() {
     await prisma.note.create({
       data: {
         userId: user?.id,
-        description: description,
-        title: title,
+        description,
+        title,
       },
     });
 
