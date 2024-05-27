@@ -22,7 +22,6 @@ export default async function Navbar() {
         </h1>
       </Link>
 
-      <div className="">Nav</div>
       <div className="flex gap-x-2">
         {(await isAuthenticated()) ? (
           <UserNav
