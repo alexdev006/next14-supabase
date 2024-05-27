@@ -5,6 +5,8 @@ import { Edit, File, Trash } from "lucide-react";
 import prisma from "@/app/lib/db";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { revalidatePath } from "next/cache";
+import { TrashDeleteButton } from "@/components/submitButton";
 
 async function getData(userId: string) {
   const data = await prisma.note.findMany({
@@ -23,6 +25,20 @@ export default async function DashboardPage() {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
   const data = await getData(user?.id as string);
+
+  async function deleteNote(formData: FormData) {
+    "use server";
+
+    const noteId = formData.get("noteId") as string;
+
+    await prisma.note.delete({
+      where: {
+        id: noteId,
+      },
+    });
+
+    revalidatePath("/dashboard");
+  }
 
   return (
     <div className="grid items-start gap-y-8">
@@ -54,31 +70,25 @@ export default async function DashboardPage() {
         </div>
       ) : (
         <div className="flex flex-col gap-y-4">
-          {data.map((item) => (
-            <Card
-              key={item.id}
-              className="flex items-center justify-between p-4"
-            >
+          {data.map(({ id, title, createdAt }) => (
+            <Card key={id} className="flex items-center justify-between p-4">
               <div className="">
-                <h2 className="font-semibold text-xl text-primary">
-                  {item.title}
-                </h2>
+                <h2 className="font-semibold text-xl text-primary">{title}</h2>
                 <p>
                   {new Intl.DateTimeFormat("fr-FR", {
                     dateStyle: "full",
-                  }).format(new Date(item.createdAt))}
+                  }).format(new Date(createdAt))}
                 </p>
               </div>
               <div className="flex gap-x-4">
-                <Link href={`/dashboard/new/${item.id}`}>
+                <Link href={`/dashboard/new/${id}`}>
                   <Button variant="outline" size="icon">
                     <Edit className="w-4 h-4" />
                   </Button>
                 </Link>
-                <form>
-                  <Button variant="destructive" size="icon">
-                    <Trash className="w-4 h-4" />
-                  </Button>
+                <form action={deleteNote}>
+                  <input name="noteId" type="hidden" value={id} />
+                  <TrashDeleteButton />
                 </form>
               </div>
             </Card>
