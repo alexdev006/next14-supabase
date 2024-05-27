@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { Edit, File, Trash } from "lucide-react";
+import { Edit, File } from "lucide-react";
+import { unstable_noStore as noStore } from "next/cache";
 
 import prisma from "@/app/lib/db";
 import { Button } from "@/components/ui/button";
@@ -9,6 +10,7 @@ import { revalidatePath } from "next/cache";
 import { TrashDeleteButton } from "@/components/submitButton";
 
 async function getData(userId: string) {
+  noStore();
   const data = await prisma.note.findMany({
     where: {
       userId: userId,

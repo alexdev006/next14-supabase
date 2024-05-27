@@ -21,9 +21,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import SubmitButton from "@/components/submitButton";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, unstable_noStore as noStore } from "next/cache";
 
 async function getData(userId: string) {
+  noStore();
   const data = prisma.user.findUnique({
     where: {
       id: userId,

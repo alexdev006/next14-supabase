@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
 import "./globals.css";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { unstable_noStore as noStore } from "next/cache";
 
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -19,6 +20,7 @@ export const metadata: Metadata = {
 };
 
 async function getData(userId: string) {
+  noStore();
   if (userId) {
     const data = await prisma.user.findUnique({
       where: {
