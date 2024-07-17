@@ -34,3 +34,18 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Deployment Tips
+
+add: "postinstall": "prisma generate"
+to package.json's script part.
+
+on Kinde.com change the url of the application once it's deployed settings=> application url (don't add the last `/` in the url adress)
+
+on vervel update environment variable :
+
+- KINDE_SITE_URL
+- KINDE_POST_LOGOUT_REDIRECT_URL
+- KINDE_POST_LOGIN_REDIRECT_URL
+
+with the final url (https://...)
